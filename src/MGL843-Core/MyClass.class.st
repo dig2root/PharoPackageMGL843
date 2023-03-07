@@ -15,12 +15,8 @@ MyClass >> createData: classes [
 
 	"Mise en place des variable"
 
-	| dataclasses wmc |
+	| dataclasses|
 	dataclasses := classes collect: [ :aClass | 
-		               wmc := 0.
-		               aClass methods do: [ :method | 
-			               wmc := wmc + method cyclomaticComplexity ].
-
 		               DataClass new
 			               Class: aClass name;
 			               PathFile: aClass sourceAnchor fileName;
@@ -28,8 +24,9 @@ MyClass >> createData: classes [
 			               Methods: aClass numberOfMethods asString;
 			               LOC: aClass numberOfLinesOfCode asString;
 			               NOC: aClass numberOfChildren asString;
-			               fanOut:  aClass fanOut asString;
-			               WMC:  wmc asString ].
+			               fanOut: aClass fanOut asString;
+			               WMC: aClass weightedMethodCount asString;
+			               LCOM: aClass lcom3 asString ].
 
 	^ dataclasses
 ]
