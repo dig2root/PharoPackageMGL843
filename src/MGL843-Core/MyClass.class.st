@@ -11,6 +11,30 @@ Class {
 }
 
 { #category : #writing }
+MyClass >> createData: classes [
+
+	"Mise en place des variable"
+
+	| dataclasses wmc |
+	dataclasses := classes collect: [ :aClass | 
+		               wmc := 0.
+		               aClass methods do: [ :method | 
+			               wmc := wmc + method cyclomaticComplexity ].
+
+		               DataClass new
+			               Class: aClass name;
+			               PathFile: aClass sourceAnchor fileName;
+			               Attributes: aClass numberOfAttributes asString;
+			               Methods: aClass numberOfMethods asString;
+			               LOC: aClass numberOfLinesOfCode asString;
+			               NOC: aClass numberOfChildren asString;
+			               fanOut:  aClass fanOut asString;
+			               WMC:  wmc asString ].
+
+	^ dataclasses
+]
+
+{ #category : #writing }
 MyClass >> getModelOnPharo: aFilename [
 		"Mise en place des variable"
 		| model|
@@ -21,25 +45,21 @@ MyClass >> getModelOnPharo: aFilename [
 ]
 
 { #category : #writing }
-MyClass >> write_file_csv [
-		"Mise en place des variable"
-	| classes fileRef writer Name Attribut|
-	
-	classes := MooseModel root second allModelClasses.
-	classes do: [ 
-	:aClass |
-	
-	
-	Name := aClass name.
-	Attribut := aClass numberOfAttributes stringForReadout.		
-		
+MyClass >> write [
+
+	| fileRef writer classes data |
 	fileRef := 'file.csv' asFileReference.
 	writer := NeoCSVWriter on: fileRef writeStream.
-		
-	writer nextPut:  #('Class' 'Attributes' 'Methods' 'LOC' 'NOC' 'fanOut' 'WMC' 'LCOM').
 
-	writer close.
-].
+	classes := MooseModel root second allModelClasses.
+	data := MyClass new createData: classes.
 
+	writer separator: $;.
+	writer
+		nextPut:
+			#( 'Class' 'PathFile' 'Attributes' 'Methods' 'LOC' 'NOC' 'fanOut' 'WMC' 'LCOM' );
+		addFields: #( Class PathFile Attributes Methods LOC NOC fanOut WMC LCOM );
+		nextPutAll: data.
 
+	writer close
 ]
