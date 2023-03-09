@@ -50,7 +50,7 @@ MyClass >> write [
 	fileRef := 'file.csv' asFileReference.
 	writer := NeoCSVWriter on: fileRef writeStream.
 
-	classes := MooseModel root allModels collect: [ :aModel | 
+	classes := MooseModel root allModels collectAll: [ :aModel | 
 		           aModel allModelClasses ].
 	data := MyClass new createData: classes.
 
