@@ -32,13 +32,15 @@ MyClass >> createData: classes [
 ]
 
 { #category : #writing }
-MyClass >> getModelOnPharo: aFilename [
+MyClass >> getModelOnPharo: aFilename and: path [
+
 		"Mise en place des variable"
-		| model|
+		| model |
 
 		aFilename asFileReference readStreamDo: 
 		[ :stream | model := FamixTypeScriptModel new 
       importFromJSONStream: stream. model install ].
+		model rootFolder: path.
 ]
 
 { #category : #writing }
@@ -48,14 +50,17 @@ MyClass >> write [
 	fileRef := 'file.csv' asFileReference.
 	writer := NeoCSVWriter on: fileRef writeStream.
 
-	classes := MooseModel root second allModelClasses.
+	classes := MooseModel root allModels collect: [ :aModel | 
+		           aModel allModelClasses ].
 	data := MyClass new createData: classes.
 
 	writer separator: $;.
 	writer
 		nextPut:
-			#( 'Class' 'PathFile' 'Attributes' 'Methods' 'LOC' 'NOC' 'fanOut' 'WMC' 'LCOM' );
-		addFields: #( Class PathFile Attributes Methods LOC NOC fanOut WMC LCOM );
+			#( 'Class' 'PathFile' 'Attributes' 'Methods' 'LOC' 'NOC' 'fanOut'
+			   'WMC' 'LCOM' );
+		addFields:
+			#( Class PathFile Attributes Methods LOC NOC fanOut WMC LCOM );
 		nextPutAll: data.
 
 	writer close
