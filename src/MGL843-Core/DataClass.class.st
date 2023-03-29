@@ -2,18 +2,38 @@ Class {
 	#name : #DataClass,
 	#superclass : #Object,
 	#instVars : [
-		'Class',
-		'PathFile',
-		'Attributes',
-		'Methods',
-		'LOC',
-		'NOC',
+		'name',
+		'sourcePath',
+		'attributes',
+		'methods',
+		'loc',
+		'noc',
 		'fanOut',
-		'WMC',
-		'LCOM'
+		'wmc',
+		'lcom'
 	],
 	#category : #'MGL843-Core'
 }
+
+{ #category : #'instance creation' }
+DataClass class >> newFromClass: aClass [
+
+	| newInstance |
+	newInstance := self new.
+
+	newInstance
+		name: aClass name;
+		sourceFile: aClass sourceAnchor fileName;
+		attributes: aClass numberOfAttributes asString;
+		methods: aClass numberOfMethods asString;
+		loc: aClass numberOfLinesOfCode asString;
+		noc: aClass numberOfChildren asString;
+		fanOut: aClass fanOut asString;
+		wmc: aClass weightedMethodCount asString;
+		lcom: aClass lcom3 asString.
+
+	^ newInstance
+]
 
 { #category : #accessing }
 DataClass >> Attributes [
@@ -28,87 +48,87 @@ DataClass >> Attributes: aString [
 ]
 
 { #category : #accessing }
-DataClass >> Class [
+DataClass >> name [
 
-	^ Class
+	^ name
 ]
 
 { #category : #accessing }
-DataClass >> Class: aString [
+DataClass >> name: aString [
 
-	Class := aString
+	name := aString
 ]
 
 { #category : #accessing }
-DataClass >> LCOM [
+DataClass >> lcom [
 
-	^ LCOM
+	^ lcom
 ]
 
 { #category : #accessing }
-DataClass >> LCOM: aString [
+DataClass >> lcom: aString [
 
-	LCOM := aString
+	lcom := aString
 ]
 
 { #category : #accessing }
-DataClass >> LOC [
+DataClass >> loc [
 
-	^ LOC
+	^ loc
 ]
 
 { #category : #accessing }
-DataClass >> LOC: aString [
+DataClass >> loc: aString [
 
-	LOC := aString
+	loc := aString
 ]
 
 { #category : #accessing }
-DataClass >> Methods [
+DataClass >> methods [
 
-	^ Methods
+	^ methods
 ]
 
 { #category : #accessing }
-DataClass >> Methods: aString [
+DataClass >> methods: aString [
 
-	Methods := aString
+	methods := aString
 ]
 
 { #category : #accessing }
-DataClass >> NOC [
+DataClass >> noc [
 
-	^ NOC
+	^ noc
 ]
 
 { #category : #accessing }
-DataClass >> NOC: aString [
+DataClass >> noc: aString [
 
-	NOC := aString
+	noc := aString
 ]
 
 { #category : #accessing }
-DataClass >> PathFile [
+DataClass >> sourcePath [
 
-	^ PathFile
+	^ sourcePath
 ]
 
 { #category : #accessing }
-DataClass >> PathFile: aString [
+DataClass >> sourcePath: aString [
 
-	PathFile := aString
+	sourcePath := aString
 ]
 
 { #category : #accessing }
-DataClass >> WMC [
+DataClass >> wmc [
 
-	^ WMC
+	^ wmc
 ]
 
 { #category : #accessing }
-DataClass >> WMC: aString [
+DataClass >> wmc: aString [
 
-	WMC := aString
+	wmc := aString
 ]
 
 { #category : #accessing }
