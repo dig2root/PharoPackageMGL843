@@ -1,5 +1,5 @@
 Class {
-	#name : #MyClass,
+	#name : #ClassMetricsCsvGenerator,
 	#superclass : #Object,
 	#classVars : [
 		'CsvWriter'
