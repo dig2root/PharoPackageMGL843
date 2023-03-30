@@ -108,15 +108,15 @@ DataClass >> noc: aString [
 ]
 
 { #category : #accessing }
-DataClass >> sourcePath [
+DataClass >> sourceFile [
 
-	^ sourcePath
+	^ sourceFile
 ]
 
 { #category : #accessing }
-DataClass >> sourcePath: aString [
+DataClass >> sourceFile: aString [
 
-	sourcePath := aString
+	sourceFile := aString
 ]
 
 { #category : #accessing }
