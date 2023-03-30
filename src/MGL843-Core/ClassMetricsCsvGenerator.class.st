@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'CsvWriter'
 	],
-	#classInstVars : []
+	#classInstVars : [],
 	#category : #'MGL843-Core'
 }
 
