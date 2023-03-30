@@ -36,15 +36,15 @@ DataClass class >> newFromClass: aClass [
 ]
 
 { #category : #accessing }
-DataClass >> Attributes [
+DataClass >> attributes [
 
-	^ Attributes
+	^ attributes
 ]
 
 { #category : #accessing }
-DataClass >> Attributes: aString [
+DataClass >> attributes: aString [
 
-	Attributes := aString
+	attributes := aString
 ]
 
 { #category : #accessing }
