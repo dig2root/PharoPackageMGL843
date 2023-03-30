@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'sourcePath',
+		'sourceFile',
 		'attributes',
 		'methods',
 		'loc',
